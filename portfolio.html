@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manmath Swami — SOC Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080d18;--bg2:#0d1220;--bg3:#111828;--cyan:#00e5ff;--cyan-dim:rgba(0,229,255,0.10);--cyan-mid:rgba(0,229,255,0.30);--green:#00ff88;--green-dim:rgba(0,255,136,0.08);--amber:#ffb300;--red:#ff4d6d;--red-dim:rgba(255,77,109,0.1);--text:#dde6f0;--muted:#6e839e;--border:rgba(0,229,255,0.13);--mono:'Share Tech Mono',monospace;--sans:'Inter',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 3rem;background:rgba(8,13,24,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.logo{font-family:var(--mono);color:var(--cyan);font-size:0.92rem;letter-spacing:0.05em;}
+.logo span{color:var(--muted);}
+nav ul{list-style:none;display:flex;gap:1.4rem;flex-wrap:wrap;}
+nav a{color:var(--muted);text-decoration:none;font-size:0.76rem;letter-spacing:0.06em;font-family:var(--mono);transition:color 0.2s;}
+nav a:hover{color:var(--cyan);}
+.nav-resume{padding:0.35rem 0.9rem;border:1px solid var(--cyan-mid);border-radius:4px;color:var(--cyan)!important;}
+.nav-resume:hover{background:var(--cyan-dim)!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{width:22px;height:2px;background:var(--cyan);border-radius:2px;transition:all 0.3s;}
+.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(8,13,24,0.98);border-bottom:1px solid var(--border);padding:1.25rem 1.5rem;z-index:99;flex-direction:column;gap:0.85rem;}
+.mobile-menu a{color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:0.82rem;padding:0.4rem 0;border-bottom:1px solid var(--border);display:block;}
+.mobile-menu a:hover{color:var(--cyan);}
+.mobile-menu.open{display:flex;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:9rem 3rem 5rem;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;pointer-events:none;opacity:0.03;background-image:linear-gradient(var(--cyan) 1px,transparent 1px),linear-gradient(90deg,var(--cyan) 1px,transparent 1px);background-size:52px 52px;}
+.hero-glow{position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:680px;height:680px;pointer-events:none;background:radial-gradient(circle,rgba(0,229,255,0.06) 0%,transparent 65%);}
+.hero-inner{position:relative;z-index:1;max-width:900px;width:100%;}
+.status-badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.38rem 0.9rem;border:1px solid rgba(0,255,136,0.3);border-radius:20px;background:rgba(0,255,136,0.07);font-family:var(--mono);font-size:0.72rem;color:var(--green);margin-bottom:1.25rem;}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
+.hero-tag{font-family:var(--mono);color:var(--green);font-size:0.78rem;margin-bottom:1.1rem;letter-spacing:0.12em;}
+.hero h1{font-family:var(--mono);font-size:clamp(2rem,6vw,4rem);line-height:1.1;color:#fff;margin-bottom:0.7rem;}
+.hero h1 span{color:var(--cyan);}
+.hero-role{font-family:var(--mono);font-size:clamp(0.78rem,1.8vw,1rem);color:var(--muted);margin-bottom:1.75rem;line-height:1.9;}
+.hero-role strong{color:var(--cyan);}
+.hero p{max-width:560px;color:var(--muted);margin-bottom:2.25rem;font-size:0.95rem;}
+.hero-btns{display:flex;gap:0.9rem;flex-wrap:wrap;}
+.btn{padding:0.68rem 1.45rem;border-radius:4px;font-size:0.82rem;font-family:var(--mono);letter-spacing:0.06em;cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.5rem;}
+.btn-primary{background:var(--cyan);color:#000;font-weight:600;border:none;}
+.btn-primary:hover{background:#33eaff;}
+.btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan-mid);}
+.btn-outline:hover{background:var(--cyan-dim);}
+.btn-green{background:transparent;color:var(--green);border:1px solid rgba(0,255,136,0.3);}
+.btn-green:hover{background:var(--green-dim);}
+.hero-career{display:flex;align-items:center;gap:0.5rem;margin-top:1.5rem;flex-wrap:wrap;}
+.career-step{font-family:var(--mono);font-size:0.7rem;padding:0.25rem 0.65rem;border-radius:3px;background:var(--bg2);border:1px solid var(--border);color:var(--muted);}
+.career-step.active{border-color:var(--cyan-mid);color:var(--cyan);}
+.career-arrow{color:var(--muted);font-size:0.75rem;}
+
+/* SECTIONS */
+.section-wrap{padding:5rem 3rem;max-width:1060px;margin:0 auto;width:100%;}
+.section-label{font-family:var(--mono);color:var(--cyan);font-size:0.72rem;letter-spacing:0.18em;margin-bottom:0.4rem;}
+h2{font-size:1.7rem;font-weight:600;color:#fff;margin-bottom:2.5rem;}
+.divider{width:100%;height:1px;background:var(--border);}
+
+/* METRICS */
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;}
+.metric-card{padding:1.5rem 1.25rem;border:1px solid var(--border);border-radius:8px;background:var(--bg2);text-align:center;transition:border-color 0.2s;}
+.metric-card:hover{border-color:var(--cyan-mid);}
+.metric-num{font-family:var(--mono);font-size:1.9rem;font-weight:600;color:var(--cyan);display:block;line-height:1.1;}
+.metric-label{font-size:0.76rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start;}
+.about-text p{color:var(--muted);margin-bottom:1rem;font-size:0.94rem;}
+.about-text p strong{color:var(--text);}
+.about-highlights{display:flex;flex-direction:column;gap:0.55rem;margin-top:1.5rem;}
+.highlight{display:flex;align-items:flex-start;gap:0.75rem;font-family:var(--mono);font-size:0.8rem;color:var(--muted);}
+.highlight::before{content:'→';color:var(--cyan);flex-shrink:0;}
+.focus-box{border:1px solid var(--border);border-radius:8px;background:var(--bg2);padding:1.5rem;margin-bottom:1rem;}
+.focus-box h3{font-family:var(--mono);font-size:0.74rem;color:var(--cyan);letter-spacing:0.12em;margin-bottom:1rem;}
+.roadmap-list{display:flex;flex-direction:column;gap:0.45rem;}
+.roadmap-item{display:flex;align-items:center;gap:0.6rem;font-size:0.82rem;color:var(--muted);}
+.roadmap-item::before{content:'◦';color:var(--cyan);}
+
+/* SKILLS */
+.skills-cats{display:flex;flex-direction:column;gap:2rem;}
+.skill-cat h3{font-family:var(--mono);font-size:0.74rem;color:var(--cyan);letter-spacing:0.12em;margin-bottom:0.85rem;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.45rem;}
+.tag{padding:0.28rem 0.72rem;border-radius:3px;border:1px solid var(--border);background:var(--bg2);font-size:0.76rem;font-family:var(--mono);color:var(--text);transition:border-color 0.2s,color 0.2s;}
+.tag:hover{border-color:var(--cyan-mid);color:var(--cyan);}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.85rem;}
+.tool-card{padding:0.9rem 1.1rem;border:1px solid var(--border);border-radius:6px;background:var(--bg2);font-family:var(--mono);font-size:0.8rem;color:var(--text);display:flex;align-items:center;gap:0.6rem;transition:border-color 0.2s;}
+.tool-card:hover{border-color:var(--cyan-mid);}
+.tool-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.tool-dot.active{background:var(--cyan);}
+.tool-dot.learning{background:var(--green);}
+.tool-level{font-size:0.64rem;color:var(--muted);margin-left:auto;}
+.legend{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap;}
+.legend-item{font-family:var(--mono);font-size:0.7rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem;}
+.legend-dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem;}
+.project-card{padding:1.6rem;border:1px solid var(--border);border-radius:8px;background:var(--bg2);display:flex;flex-direction:column;gap:0.7rem;transition:border-color 0.2s,transform 0.2s;}
+.project-card:hover{border-color:var(--cyan-mid);transform:translateY(-3px);}
+.project-card.dev{border-color:rgba(255,179,0,0.2);}
+.project-card.dev:hover{border-color:rgba(255,179,0,0.5);}
+.project-header{display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;}
+.project-tag{display:inline-block;padding:0.18rem 0.58rem;border-radius:3px;background:var(--cyan-dim);color:var(--cyan);font-family:var(--mono);font-size:0.68rem;white-space:nowrap;}
+.project-tag.amber{background:rgba(255,179,0,0.1);color:var(--amber);}
+.project-card h3{font-size:0.96rem;font-weight:600;color:#fff;}
+.project-card p{font-size:0.82rem;color:var(--muted);flex:1;line-height:1.6;}
+.project-skills{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.2rem;}
+.project-skill{padding:0.15rem 0.52rem;border-radius:3px;border:1px solid var(--border);font-family:var(--mono);font-size:0.66rem;color:var(--muted);}
+.project-link{font-family:var(--mono);font-size:0.76rem;color:var(--cyan);text-decoration:none;align-self:flex-start;}
+.project-link:hover{text-decoration:underline;}
+.dev-badge{font-family:var(--mono);font-size:0.7rem;color:var(--amber);align-self:flex-start;display:flex;align-items:center;gap:0.4rem;}
+
+/* CASE STUDIES */
+.case-study{border:1px solid var(--border);border-radius:8px;background:var(--bg2);margin-bottom:1.5rem;overflow:hidden;}
+.case-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;}
+.case-header h3{font-size:0.95rem;font-weight:600;color:#fff;font-family:var(--mono);}
+.severity{padding:0.22rem 0.65rem;border-radius:3px;font-family:var(--mono);font-size:0.7rem;font-weight:600;}
+.severity.high{background:rgba(255,77,109,0.15);color:var(--red);border:1px solid rgba(255,77,109,0.3);}
+.severity.medium{background:rgba(255,179,0,0.12);color:var(--amber);border:1px solid rgba(255,179,0,0.3);}
+.case-body{padding:1.5rem;}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;}
+.case-block h4{font-family:var(--mono);font-size:0.7rem;color:var(--cyan);letter-spacing:0.1em;margin-bottom:0.75rem;}
+.case-block ul{list-style:none;display:flex;flex-direction:column;gap:0.4rem;}
+.case-block ul li{font-size:0.81rem;color:var(--muted);display:flex;align-items:flex-start;gap:0.5rem;}
+.case-block ul li::before{content:'▸';color:var(--cyan);flex-shrink:0;font-size:0.7rem;margin-top:3px;}
+.case-findings{padding:1rem 1.25rem;background:var(--bg3);border-radius:6px;border-left:3px solid var(--red);}
+.case-findings h4{font-family:var(--mono);font-size:0.7rem;color:var(--red);letter-spacing:0.1em;margin-bottom:0.6rem;}
+.case-findings p{font-size:0.81rem;color:var(--muted);line-height:1.6;}
+.case-rec{padding:1rem 1.25rem;background:var(--bg3);border-radius:6px;border-left:3px solid var(--green);margin-top:0.75rem;}
+.case-rec h4{font-family:var(--mono);font-size:0.7rem;color:var(--green);letter-spacing:0.1em;margin-bottom:0.6rem;}
+.case-rec ul{list-style:none;display:flex;flex-direction:column;gap:0.35rem;}
+.case-rec ul li{font-size:0.81rem;color:var(--muted);display:flex;align-items:flex-start;gap:0.5rem;}
+.case-rec ul li::before{content:'✓';color:var(--green);flex-shrink:0;}
+
+/* DETECTION RULES */
+.rules-grid{display:flex;flex-direction:column;gap:1.25rem;}
+.rule-card{border:1px solid var(--border);border-radius:8px;background:var(--bg2);overflow:hidden;}
+.rule-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;}
+.rule-header h3{font-family:var(--mono);font-size:0.88rem;color:#fff;}
+.rule-badge{font-family:var(--mono);font-size:0.68rem;padding:0.18rem 0.6rem;border-radius:3px;background:var(--cyan-dim);color:var(--cyan);border:1px solid var(--border);}
+.rule-code{background:var(--bg);padding:1.25rem 1.5rem;font-family:var(--mono);font-size:0.76rem;color:#a8c8e8;line-height:1.85;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.rule-code .kw{color:var(--cyan);}
+.rule-code .str{color:var(--green);}
+.rule-code .cm{color:var(--muted);}
+.rule-code .num{color:var(--amber);}
+
+/* MITRE */
+.mitre-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.mitre-table{width:100%;border-collapse:collapse;font-size:0.84rem;min-width:600px;}
+.mitre-table th{font-family:var(--mono);font-size:0.7rem;color:var(--cyan);letter-spacing:0.1em;text-align:left;padding:0.75rem 1rem;border-bottom:1px solid var(--border);background:var(--bg2);}
+.mitre-table td{padding:0.85rem 1rem;border-bottom:1px solid rgba(0,229,255,0.07);color:var(--muted);vertical-align:middle;}
+.mitre-table tr:hover td{background:var(--bg2);}
+.mitre-id{font-family:var(--mono);color:var(--cyan);font-size:0.8rem;white-space:nowrap;}
+.mitre-tactic{font-family:var(--mono);font-size:0.72rem;padding:0.18rem 0.6rem;border-radius:3px;background:var(--red-dim);color:var(--red);border:1px solid rgba(255,77,109,0.2);white-space:nowrap;}
+
+/* DASHBOARDS */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.1rem;}
+.dash-card{border:1px solid var(--border);border-radius:8px;background:var(--bg2);overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
+.dash-card:hover{border-color:var(--cyan-mid);transform:translateY(-2px);}
+.dash-preview{height:130px;background:var(--bg3);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0.75rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.dash-preview::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 18px,rgba(0,229,255,0.04) 18px,rgba(0,229,255,0.04) 19px);}
+.dash-bars{display:flex;align-items:flex-end;gap:5px;height:55px;position:relative;z-index:1;}
+.dash-bar{width:13px;border-radius:2px 2px 0 0;background:var(--cyan);opacity:0.7;}
+.dash-bar.red{background:var(--red);}
+.dash-bar.green{background:var(--green);}
+.dash-icon{font-size:1.75rem;position:relative;z-index:1;}
+.dash-label-inner{font-family:var(--mono);font-size:0.68rem;color:var(--muted);position:relative;z-index:1;}
+.dash-info{padding:0.9rem 1rem;}
+.dash-info h3{font-size:0.84rem;font-weight:500;color:var(--text);margin-bottom:0.2rem;}
+.dash-info p{font-size:0.73rem;color:var(--muted);}
+
+/* SOULMATRIX */
+.soulmatrix-box{border:1px solid rgba(0,229,255,0.25);border-radius:10px;background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);padding:2.5rem;position:relative;overflow:hidden;}
+.soulmatrix-box::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,0.07) 0%,transparent 70%);pointer-events:none;}
+.soulmatrix-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.sm-icon{width:48px;height:48px;border-radius:8px;background:var(--cyan-dim);border:1px solid var(--cyan-mid);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.soulmatrix-header h3{font-family:var(--mono);font-size:1.1rem;color:#fff;}
+.soulmatrix-header p{font-size:0.8rem;color:var(--cyan);}
+.sm-desc{color:var(--muted);font-size:0.92rem;margin-bottom:1.75rem;max-width:600px;}
+.sm-focus{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:0.85rem;}
+.sm-card{padding:0.9rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);display:flex;align-items:center;gap:0.75rem;}
+.sm-card-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+.sm-card span{font-size:0.8rem;color:var(--text);font-family:var(--mono);}
+.ai-projects{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem;}
+.ai-card{border-radius:8px;background:var(--bg);padding:1.5rem;position:relative;overflow:hidden;}
+.ai-card.raw{border:1px solid rgba(255,77,109,0.3);}
+.ai-card.nyrex{border:1px solid rgba(0,229,255,0.25);}
+.ai-card-label{position:absolute;top:0;right:0;padding:0.28rem 0.75rem;font-family:var(--mono);font-size:0.62rem;border-bottom-left-radius:6px;}
+.ai-card.raw .ai-card-label{background:rgba(255,77,109,0.12);color:var(--red);border-left:1px solid rgba(255,77,109,0.2);border-bottom:1px solid rgba(255,77,109,0.2);}
+.ai-card.nyrex .ai-card-label{background:rgba(0,229,255,0.08);color:var(--cyan);border-left:1px solid var(--border);border-bottom:1px solid var(--border);}
+.ai-name{font-family:var(--mono);font-size:1.3rem;font-weight:700;letter-spacing:0.15em;margin-bottom:0.3rem;}
+.ai-card.raw .ai-name{color:var(--red);}
+.ai-card.nyrex .ai-name{color:var(--cyan);}
+.ai-subtitle{font-family:var(--mono);font-size:0.7rem;color:var(--muted);margin-bottom:0.9rem;letter-spacing:0.05em;}
+.ai-desc{font-size:0.81rem;color:var(--muted);line-height:1.65;margin-bottom:1rem;}
+.ai-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;}
+.ai-tag{padding:0.18rem 0.55rem;border-radius:3px;font-family:var(--mono);font-size:0.65rem;}
+.ai-card.raw .ai-tag{border:1px solid rgba(255,77,109,0.2);color:var(--red);}
+.ai-card.nyrex .ai-tag{border:1px solid var(--border);color:var(--muted);}
+.nyrex-versions{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;}
+.nyrex-v{padding:0.6rem 0.75rem;border:1px solid var(--border);border-radius:5px;background:var(--bg2);}
+.nyrex-v-title{font-family:var(--mono);font-size:0.67rem;margin-bottom:0.25rem;}
+.nyrex-v-title.personal{color:var(--cyan);}
+.nyrex-v-title.enterprise{color:var(--amber);}
+.nyrex-v p{font-size:0.73rem;color:var(--muted);line-height:1.4;}
+
+/* GITHUB */
+.github-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.1rem;}
+.gh-card{border:1px solid var(--border);border-radius:8px;background:var(--bg2);padding:1.4rem;transition:border-color 0.2s,transform 0.2s;}
+.gh-card:hover{border-color:var(--cyan-mid);transform:translateY(-2px);}
+.gh-card-top{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem;}
+.gh-type{font-family:var(--mono);font-size:0.68rem;padding:0.15rem 0.55rem;border-radius:3px;background:var(--cyan-dim);color:var(--cyan);border:1px solid var(--border);}
+.gh-card h3{font-size:0.88rem;font-weight:500;color:#fff;margin-bottom:0.4rem;}
+.gh-card p{font-size:0.79rem;color:var(--muted);line-height:1.55;}
+.gh-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1rem;}
+.gh-lang{font-family:var(--mono);font-size:0.7rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem;}
+.gh-lang::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--cyan);display:inline-block;}
+.gh-link{font-family:var(--mono);font-size:0.74rem;color:var(--cyan);text-decoration:none;}
+.gh-link:hover{text-decoration:underline;}
+
+/* EXPERIENCE */
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.exp-box{border:1px solid var(--border);border-radius:8px;background:var(--bg2);padding:1.5rem;}
+.exp-box h3{font-family:var(--mono);font-size:0.74rem;color:var(--cyan);letter-spacing:0.1em;margin-bottom:1.1rem;}
+.exp-items{display:flex;flex-direction:column;gap:0.5rem;}
+.exp-item{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.81rem;color:var(--muted);}
+.exp-item-dot{color:var(--cyan);flex-shrink:0;font-size:0.7rem;margin-top:4px;}
+.exp-full{border:1px solid var(--border);border-radius:8px;background:var(--bg2);padding:1.5rem;margin-top:1.5rem;}
+.exp-full h3{font-family:var(--mono);font-size:0.74rem;color:var(--cyan);letter-spacing:0.1em;margin-bottom:1.1rem;}
+.exp-tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.85rem;}
+.exp-tool-card{padding:1rem;border:1px solid var(--border);border-radius:6px;background:var(--bg3);}
+.exp-tool-name{font-family:var(--mono);font-size:0.8rem;color:var(--text);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem;}
+.exp-tool-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+.exp-tool-card p{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+
+/* CONTACT */
+.contact-box{border:1px solid var(--border);border-radius:10px;background:var(--bg2);padding:3rem;text-align:center;}
+.contact-box p{color:var(--muted);max-width:460px;margin:0 auto 2rem;font-size:0.92rem;}
+.contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.contact-link{display:flex;align-items:center;gap:0.6rem;padding:0.68rem 1.35rem;border:1px solid var(--border);border-radius:6px;color:var(--text);text-decoration:none;font-size:0.8rem;font-family:var(--mono);background:var(--bg3);transition:all 0.2s;}
+.contact-link:hover{border-color:var(--cyan-mid);color:var(--cyan);}
+
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-family:var(--mono);font-size:0.72rem;color:var(--muted);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;}
+  .exp-grid{grid-template-columns:1fr;}
+  .ai-projects{grid-template-columns:1fr;}
+  .case-grid{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  nav ul{display:none;}
+  nav{padding:0.9rem 1.25rem;}
+  .hamburger{display:flex;}
+  .hero{padding:7rem 1.25rem 3rem;}
+  .section-wrap{padding:3rem 1.25rem;}
+  .hero-role{font-size:0.82rem;}
+  .soulmatrix-box{padding:1.5rem;}
+  .contact-box{padding:2rem 1.25rem;}
+  .nyrex-versions{grid-template-columns:1fr;}
+  h2{font-size:1.45rem;}
+}
+@media(max-width:480px){
+  .hero h1{font-size:1.8rem;}
+  .btn{padding:0.6rem 1.1rem;font-size:0.76rem;}
+  .metrics-grid{grid-template-columns:repeat(2,1fr);}
+  .hero-btns{flex-direction:column;align-items:flex-start;}
+  .contact-link{width:100%;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><span>~/</span>manmath-swami</div>
+  <ul>
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#casestudies">cases</a></li>
+    <li><a href="#detections">detections</a></li>
+    <li><a href="#mitre">mitre</a></li>
+    <li><a href="#soulmatrix">soulmatrix</a></li>
+    <li><a href="#contact">contact</a></li>
+    <li><a href="#" class="nav-resume">resume ↓</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">about</a>
+  <a href="#skills" onclick="closeMenu()">skills</a>
+  <a href="#projects" onclick="closeMenu()">projects</a>
+  <a href="#casestudies" onclick="closeMenu()">case studies</a>
+  <a href="#detections" onclick="closeMenu()">detections</a>
+  <a href="#mitre" onclick="closeMenu()">mitre att&ck</a>
+  <a href="#soulmatrix" onclick="closeMenu()">soulmatrix</a>
+  <a href="#contact" onclick="closeMenu()">contact</a>
+  <a href="#" onclick="closeMenu()">resume ↓</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="status-badge"><div class="status-dot"></div>Open to SOC Analyst Roles</div>
+    <div class="hero-tag">// soc_analyst_portfolio.init()</div>
+    <h1>Manmath <span>Swami</span></h1>
+    <div class="hero-role">
+      <strong>SOC Analyst</strong> &nbsp;|&nbsp; Security Monitoring &amp; Threat Detection<br>
+      B.Sc. Computer Science &nbsp;|&nbsp; Blue Team Operations &nbsp;|&nbsp; Founder @ SoulMatrix
+    </div>
+    <p>Hands-on experience in security monitoring, log analysis, SIEM operations, and threat detection. I build labs, write detections, and investigate real attack patterns — not just theory.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#casestudies" class="btn btn-outline">SOC Case Studies</a>
+      <a href="#" class="btn btn-green">Download Resume</a>
+    </div>
+    <div class="hero-career">
+      <span class="career-step active">SOC L1</span>
+      <span class="career-arrow">→</span>
+      <span class="career-step">SOC L2</span>
+      <span class="career-arrow">→</span>
+      <span class="career-step">Threat Hunter</span>
+      <span class="career-arrow">→</span>
+      <span class="career-step">Security Engineer</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- METRICS -->
+<div class="section-wrap">
+  <div class="section-label">00 // impact_metrics</div>
+  <h2>By The Numbers</h2>
+  <div class="metrics-grid">
+    <div class="metric-card"><span class="metric-num">5000+</span><div class="metric-label">Security Events Analyzed</div></div>
+    <div class="metric-card"><span class="metric-num">100+</span><div class="metric-label">SPL Queries Executed</div></div>
+    <div class="metric-card"><span class="metric-num">20+</span><div class="metric-label">Threat Scenarios Investigated</div></div>
+    <div class="metric-card"><span class="metric-num">3+</span><div class="metric-label">Security Labs Built</div></div>
+    <div class="metric-card"><span class="metric-num">50+</span><div class="metric-label">Hours of Security Monitoring</div></div>
+    <div class="metric-card"><span class="metric-num">7</span><div class="metric-label">Hands-On Security Projects</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<div class="section-wrap" id="about">
+  <div class="section-label">01 // about_me</div>
+  <h2>Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I am a <strong>Bachelor of Computer Science graduate</strong> with hands-on experience in Security Monitoring, Log Analysis, Threat Detection, Incident Investigation, and SIEM technologies.</p>
+      <p>I have built and configured cybersecurity labs, analyzed Windows Security Logs, investigated authentication events, and worked with <strong>Splunk</strong> for security monitoring and incident detection.</p>
+      <p>I operate with a defender's mindset — I think in terms of attacker techniques, detection gaps, and incident timelines. My approach is always practical, lab-driven, and documentation-focused.</p>
+      <p>Beyond technical skills, I am the <strong>Founder of SoulMatrix</strong>, a cybersecurity startup with a vision to bring AI-powered security solution.</p>
+      <div class="about-highlights">
+        <div class="highlight">Hands-on SOC lab builder and threat investigator</div>
+        <div class="highlight">Blue team focused — detection, monitoring, and response</div>
+        <div class="highlight">Practical Splunk SPL and Windows Event Log experience</div>
+        <div class="highlight">Founder of SoulMatrix — cybersecurity startup</div>
+      </div>
+    </div>
+    <div>
+      <div class="focus-box">
+        <h3>// career_roadmap</h3>
+        <div class="roadmap-list">
+          <div class="roadmap-item">Active Directory Security</div>
+          <div class="roadmap-item">MITRE ATT&amp;CK Framework</div>
+          <div class="roadmap-item">Incident Response</div>
+          <div class="roadmap-item">Cloud Security</div>
+        </div>
+      </div>
+      <div class="focus-box">
+        <h3>// education</h3>
+        <div class="roadmap-list">
+          <div class="roadmap-item">Bachelor of Computer Science</div>
+          <div class="roadmap-item">Cybersecurity Self-Study &amp; Practice</div>
+          <div class="roadmap-item">Hands-on Lab Practice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<div class="section-wrap" id="skills">
+  <div class="section-label">02 // core_skills</div>
+  <h2>Technical Skills</h2>
+  <div class="skills-cats">
+    <div class="skill-cat">
+      <h3>// soc &amp; blue team operations</h3>
+      <div class="skill-tags">
+        <span class="tag">Security Monitoring</span><span class="tag">Log Analysis</span><span class="tag">Threat Detection</span><span class="tag">Incident Investigation</span><span class="tag">Incident Response Basics</span><span class="tag">SIEM Fundamentals</span><span class="tag">Threat Hunting Basics</span><span class="tag">Security Reporting</span><span class="tag">Brute Force Detection</span><span class="tag">Password Spray Detection</span><span class="tag">RDP Activity Monitoring</span><span class="tag">Authentication Monitoring</span><span class="tag">Account Activity Analysis</span><span class="tag">Security Event Correlation</span><span class="tag">Blue Team Operations</span><span class="tag">SOC Fundamentals</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <h3>// windows event log expertise</h3>
+      <div class="skill-tags">
+        <span class="tag">Windows Event Log Analysis</span><span class="tag">Event ID 4624 — Successful Login</span><span class="tag">Event ID 4625 — Failed Login</span><span class="tag">Event ID 4672 — Special Privileges</span><span class="tag">Logon Type 2 (Interactive)</span><span class="tag">Logon Type 3 (Network)</span><span class="tag">Logon Type 10 (RDP)</span><span class="tag">User Activity Monitoring</span><span class="tag">Security Event Correlation</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <h3>// network &amp; security fundamentals</h3>
+      <div class="skill-tags">
+        <span class="tag">TCP/IP</span><span class="tag">OSI Model</span><span class="tag">LAN / WAN / PAN</span><span class="tag">Firewall Concepts</span><span class="tag">IDS / IPS</span><span class="tag">Switching / Ethernet</span><span class="tag">Network Security</span><span class="tag">Defensive Security</span><span class="tag">Vulnerability Assessment Basics</span><span class="tag">Risk Assessment Basics</span><span class="tag">Security Documentation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TOOLS -->
+<div class="section-wrap">
+  <div class="section-label">03 // tools_&amp;_technologies</div>
+  <h2>Tools I Work With</h2>
+  <div class="tools-grid">
+    <div class="tool-card"><div class="tool-dot active"></div>Splunk Enterprise<span class="tool-level">Active</span></div>
+    <div class="tool-card"><div class="tool-dot active"></div>Splunk Forwarder<span class="tool-level">Active</span></div>
+    <div class="tool-card"><div class="tool-dot active"></div>Windows Sec Logs<span class="tool-level">Active</span></div>
+    <div class="tool-card"><div class="tool-dot active"></div>VirtualBox<span class="tool-level">Active</span></div>
+    <div class="tool-card"><div class="tool-dot active"></div>Burp Suite<span class="tool-level">Active</span></div>
+    <div class="tool-card"><div class="tool-dot active"></div>Wireshark<span class="tool-level">Active</span></div>
+    <div class="tool-card"><div class="tool-dot active"></div>Nmap<span class="tool-level">Active</span></div>
+    <div class="tool-card"><div class="tool-dot active"></div>Kali Linux<span class="tool-level">Active</span></div>
+    <div class="tool-card"><div class="tool-dot learning"></div>Sysmon<span class="tool-level">Learning</span></div>
+    <div class="tool-card"><div class="tool-dot learning"></div>Velociraptor<span class="tool-level">Learning</span></div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--cyan);"></span>Currently Using</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--green);"></span>Actively Learning</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<div class="section-wrap" id="projects">
+  <div class="section-label">04 // projects_&amp;_labs</div>
+  <h2>Hands-On Work</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-header"><h3>Splunk Brute Force Detection Lab</h3><span class="project-tag">SIEM</span></div>
+      <p>Built a Splunk-based lab to monitor Windows Security Logs, detect brute force attacks, investigate suspicious login activity, and create SPL-based detections for authentication anomalies.</p>
+      <div class="project-skills"><span class="project-skill">Splunk</span><span class="project-skill">SPL</span><span class="project-skill">Event Logs</span><span class="project-skill">Threat Detection</span></div>
+      <a href="https://github.com/manmath1272-design" class="project-link" target="_blank">→ view on github</a>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><h3>Windows Event Log Investigation</h3><span class="project-tag">Log Analysis</span></div>
+      <p>Performed detailed analysis of Windows Security Events — successful logins, failed logins, RDP access, and privilege escalation events — to identify suspicious activity and document findings.</p>
+      <div class="project-skills"><span class="project-skill">Event Log Analysis</span><span class="project-skill">Incident Investigation</span><span class="project-skill">Windows Security</span></div>
+      <a href="https://github.com/manmath1272-design" class="project-link" target="_blank">→ view on github</a>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><h3>Home SOC Lab</h3><span class="project-tag">SOC Ops</span></div>
+      <p>Created a personal SOC lab using Windows systems, Splunk, and security monitoring tools to simulate real-world monitoring and incident detection workflows end-to-end.</p>
+      <div class="project-skills"><span class="project-skill">SOC Operations</span><span class="project-skill">SIEM</span><span class="project-skill">Detection Engineering</span></div>
+      <a href="https://github.com/manmath1272-design" class="project-link" target="_blank">→ view on github</a>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><h3>Vulnerability Assessment Project</h3><span class="project-tag">VA</span></div>
+      <p>Conducted vulnerability assessments and documented findings, risk ratings, affected assets, and remediation recommendations in a structured professional report.</p>
+      <div class="project-skills"><span class="project-skill">Vulnerability Assessment</span><span class="project-skill">Risk Analysis</span><span class="project-skill">Reporting</span></div>
+      <a href="https://github.com/manmath1272-design" class="project-link" target="_blank">→ view on github</a>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><h3>Network Security Fundamentals Lab</h3><span class="project-tag">Networking</span></div>
+      <p>Studied and practiced TCP/IP, OSI Model, MAC Addressing, Ethernet Communication, Switching, and Security Monitoring across a virtualized lab environment.</p>
+      <div class="project-skills"><span class="project-skill">Networking</span><span class="project-skill">Network Security</span><span class="project-skill">Traffic Analysis</span></div>
+      <a href="https://github.com/manmath1272-design" class="project-link" target="_blank">→ view on github</a>
+    </div>
+    <div class="project-card dev">
+      <div class="project-header"><h3>AI-Powered Threat Hunting Dashboard</h3><span class="project-tag amber">AI + SOC</span></div>
+      <p>Building an AI-powered threat hunting dashboard that automates detection of suspicious patterns across security logs, correlates events intelligently, and presents actionable threat intelligence to SOC analysts in real time.</p>
+      <div class="project-skills"><span class="project-skill">AI/ML</span><span class="project-skill">Threat Hunting</span><span class="project-skill">SIEM</span><span class="project-skill">Log Correlation</span></div>
+      <div class="dev-badge">⟳ In Development</div>
+    </div>
+    <div class="project-card dev">
+      <div class="project-header"><h3>Dark Web Exposure Monitor</h3><span class="project-tag amber">Threat Intel</span></div>
+      <p>Developing a dark web exposure monitoring system that scans for leaked credentials, sensitive data, and organizational exposure — providing early warning alerts and structured risk reports.</p>
+      <div class="project-skills"><span class="project-skill">Threat Intelligence</span><span class="project-skill">OSINT</span><span class="project-skill">Dark Web</span><span class="project-skill">Risk Reporting</span></div>
+      <div class="dev-badge">⟳ In Development</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CASE STUDIES -->
+<div class="section-wrap" id="casestudies">
+  <div class="section-label">05 // soc_case_studies</div>
+  <h2>Incident Investigations</h2>
+  <div class="case-study">
+    <div class="case-header">
+      <h3>Case #001 — RDP Brute Force Attack Investigation</h3>
+      <span class="severity high">HIGH SEVERITY</span>
+    </div>
+    <div class="case-body">
+      <div class="case-grid">
+        <div class="case-block">
+          <h4>// scenario</h4>
+          <ul>
+            <li>15 failed login attempts in under 2 minutes</li>
+            <li>All attempts from same source IP address</li>
+            <li>Logon Type 10 (RDP) observed across all events</li>
+            <li>Successful login detected after repeated failures</li>
+            <li>Event IDs 4625 (failed) and 4624 (success) correlated</li>
+          </ul>
+        </div>
+        <div class="case-block">
+          <h4>// investigation process</h4>
+          <ul>
+            <li>Queried Splunk for Event ID 4625 with source IP filter</li>
+            <li>Correlated failed attempts with Event ID 4624 timeline</li>
+            <li>Identified Logon Type 10 confirming RDP vector</li>
+            <li>Checked Event ID 4672 for privilege escalation post-login</li>
+            <li>Documented full attack timeline and findings</li>
+          </ul>
+        </div>
+      </div>
+      <div class="case-findings">
+        <h4>// findings</h4>
+        <p>Attacker conducted automated RDP brute force from a single IP. After 15 failed attempts, a successful authentication was achieved, indicating weak credentials. Post-login privilege escalation events (4672) were detected, suggesting elevated access was gained. Incident classified as confirmed unauthorized access.</p>
+      </div>
+      <div class="case-rec">
+        <h4>// recommendations</h4>
+        <ul>
+          <li>Implement account lockout policy after 5 failed attempts</li>
+          <li>Restrict RDP access to VPN and trusted IPs only</li>
+          <li>Enable Multi-Factor Authentication (MFA) for all RDP sessions</li>
+          <li>Alert on Logon Type 10 events from external IPs</li>
+          <li>Review and rotate credentials for the compromised account</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="case-study">
+    <div class="case-header">
+      <h3>Case #002 — Password Spray Attack Detection</h3>
+      <span class="severity medium">MEDIUM SEVERITY</span>
+    </div>
+    <div class="case-body">
+      <div class="case-grid">
+        <div class="case-block">
+          <h4>// scenario</h4>
+          <ul>
+            <li>Single failed login attempt across multiple accounts</li>
+            <li>Same source IP targeting different usernames</li>
+            <li>Event ID 4625 spread across 30-minute window</li>
+            <li>Low failure count per account — evading lockout</li>
+            <li>Pattern consistent with password spray technique</li>
+          </ul>
+        </div>
+        <div class="case-block">
+          <h4>// investigation process</h4>
+          <ul>
+            <li>SPL query grouped 4625 events by source IP and username</li>
+            <li>Identified single IP with failures against 10+ accounts</li>
+            <li>Checked time distribution to confirm spray pattern</li>
+            <li>Reviewed successful logins from same IP post-spray</li>
+            <li>Cross-referenced with user account activity baseline</li>
+          </ul>
+        </div>
+      </div>
+      <div class="case-findings">
+        <h4>// findings</h4>
+        <p>A password spray attack was identified from a single IP targeting multiple accounts with minimal attempts per account to avoid lockout detection. No successful authentications were confirmed — early detection. Classified as attempted unauthorized access — contained.</p>
+      </div>
+      <div class="case-rec">
+        <h4>// recommendations</h4>
+        <ul>
+          <li>Create SPL alert for single IP hitting 5+ different accounts</li>
+          <li>Implement geo-based login anomaly detection</li>
+          <li>Enforce MFA across all user accounts</li>
+          <li>Block identified attacker IP at firewall level</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DETECTION RULES -->
+<div class="section-wrap" id="detections">
+  <div class="section-label">06 // detection_library</div>
+  <h2>SPL Detection Rules</h2>
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-header"><h3>Brute Force Detection</h3><span class="rule-badge">Event ID 4625</span></div>
+      <div class="rule-code"><span class="cm">| Detect 10+ failed logins from same IP within 5 minutes</span>
+<span class="kw">index</span>=windows <span class="kw">EventCode</span>=<span class="num">4625</span>
+<span class="kw">| stats</span> count <span class="kw">by</span> Source_Network_Address, Account_Name
+<span class="kw">| where</span> count &gt; <span class="num">10</span>
+<span class="kw">| sort</span> - count
+<span class="kw">| rename</span> Source_Network_Address <span class="kw">as</span> <span class="str">"Attacker IP"</span>
+<span class="kw">| table</span> <span class="str">"Attacker IP"</span>, Account_Name, count</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-header"><h3>Password Spray Detection</h3><span class="rule-badge">Multi-Account</span></div>
+      <div class="rule-code"><span class="cm">| Detect single IP failing against multiple accounts</span>
+<span class="kw">index</span>=windows <span class="kw">EventCode</span>=<span class="num">4625</span>
+<span class="kw">| stats</span> dc(Account_Name) <span class="kw">as</span> unique_accounts count <span class="kw">by</span> Source_Network_Address
+<span class="kw">| where</span> unique_accounts &gt; <span class="num">5</span>
+<span class="kw">| sort</span> - unique_accounts
+<span class="kw">| table</span> Source_Network_Address, unique_accounts, count</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-header"><h3>RDP Activity Monitoring</h3><span class="rule-badge">Logon Type 10</span></div>
+      <div class="rule-code"><span class="cm">| Monitor all RDP authentication events</span>
+<span class="kw">index</span>=windows <span class="kw">EventCode</span>=<span class="num">4624</span> Logon_Type=<span class="num">10</span>
+<span class="kw">| stats</span> count <span class="kw">by</span> Account_Name, Source_Network_Address, _time
+<span class="kw">| sort</span> - _time
+<span class="kw">| table</span> _time, Account_Name, Source_Network_Address, count</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-header"><h3>Failed Then Successful Login</h3><span class="rule-badge">Correlation</span></div>
+      <div class="rule-code"><span class="cm">| Detect brute force success pattern</span>
+<span class="kw">index</span>=windows <span class="kw">EventCode</span> IN (<span class="num">4624</span>, <span class="num">4625</span>)
+<span class="kw">| eval</span> status=<span class="kw">if</span>(EventCode==<span class="num">4624</span>, <span class="str">"success"</span>, <span class="str">"failed"</span>)
+<span class="kw">| stats</span> count(eval(status=<span class="str">"failed"</span>)) <span class="kw">as</span> fails
+       count(eval(status=<span class="str">"success"</span>)) <span class="kw">as</span> success <span class="kw">by</span> Source_Network_Address
+<span class="kw">| where</span> fails &gt; <span class="num">5</span> AND success &gt; <span class="num">0</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MITRE -->
+<div class="section-wrap" id="mitre">
+  <div class="section-label">07 // mitre_att&amp;ck_mapping</div>
+  <h2>MITRE ATT&amp;CK Coverage</h2>
+  <div class="mitre-wrap">
+    <table class="mitre-table">
+      <thead>
+        <tr><th>Technique</th><th>ATT&amp;CK ID</th><th>Tactic</th><th>Detection Method</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Brute Force</td><td><span class="mitre-id">T1110</span></td><td><span class="mitre-tactic">Credential Access</span></td><td>Event ID 4625 — Failed logins threshold</td><td style="color:var(--green);font-family:var(--mono);font-size:0.75rem;">✓ Detected</td></tr>
+        <tr><td>Password Spraying</td><td><span class="mitre-id">T1110.003</span></td><td><span class="mitre-tactic">Credential Access</span></td><td>Multi-account failure from single IP</td><td style="color:var(--green);font-family:var(--mono);font-size:0.75rem;">✓ Detected</td></tr>
+        <tr><td>Remote Services (RDP)</td><td><span class="mitre-id">T1021.001</span></td><td><span class="mitre-tactic">Lateral Movement</span></td><td>Logon Type 10 — Event ID 4624</td><td style="color:var(--green);font-family:var(--mono);font-size:0.75rem;">✓ Detected</td></tr>
+        <tr><td>Valid Accounts</td><td><span class="mitre-id">T1078</span></td><td><span class="mitre-tactic">Defense Evasion</span></td><td>Successful login after multiple failures</td><td style="color:var(--green);font-family:var(--mono);font-size:0.75rem;">✓ Detected</td></tr>
+        <tr><td>Privilege Escalation</td><td><span class="mitre-id">T1068</span></td><td><span class="mitre-tactic">Privilege Escalation</span></td><td>Event ID 4672 — Special Privileges</td><td style="color:var(--green);font-family:var(--mono);font-size:0.75rem;">✓ Detected</td></tr>
+        <tr><td>Network Service Discovery</td><td><span class="mitre-id">T1046</span></td><td><span class="mitre-tactic">Discovery</span></td><td>Unusual network scanning patterns</td><td style="color:var(--amber);font-family:var(--mono);font-size:0.75rem;">⟳ Learning</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DASHBOARDS -->
+<div class="section-wrap" id="dashboards">
+  <div class="section-label">08 // splunk_dashboards</div>
+  <h2>Splunk Dashboards</h2>
+  <div class="dash-grid">
+    <div class="dash-card">
+      <div class="dash-preview">
+        <div class="dash-bars"><div class="dash-bar red" style="height:25px;"></div><div class="dash-bar red" style="height:45px;"></div><div class="dash-bar red" style="height:30px;"></div><div class="dash-bar red" style="height:55px;"></div><div class="dash-bar red" style="height:20px;"></div><div class="dash-bar red" style="height:40px;"></div></div>
+        <div class="dash-label-inner">Failed Login Spikes</div>
+      </div>
+      <div class="dash-info"><h3>Failed Login Dashboard</h3><p>4625 events over time — brute force visualization</p></div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-preview">
+        <div class="dash-bars"><div class="dash-bar" style="height:30px;"></div><div class="dash-bar green" style="height:50px;"></div><div class="dash-bar" style="height:35px;"></div><div class="dash-bar green" style="height:45px;"></div><div class="dash-bar" style="height:20px;"></div><div class="dash-bar green" style="height:38px;"></div></div>
+        <div class="dash-label-inner">Auth Events Timeline</div>
+      </div>
+      <div class="dash-info"><h3>Authentication Monitor</h3><p>Successful vs failed login correlation</p></div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-preview"><div class="dash-icon">🌐</div><div class="dash-label-inner">Source IP Heatmap</div></div>
+      <div class="dash-info"><h3>Brute Force Detection</h3><p>IP-based attack source map and alerts</p></div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-preview">
+        <div class="dash-bars"><div class="dash-bar" style="height:20px;"></div><div class="dash-bar" style="height:35px;"></div><div class="dash-bar red" style="height:55px;"></div><div class="dash-bar" style="height:25px;"></div><div class="dash-bar red" style="height:48px;"></div><div class="dash-bar" style="height:30px;"></div></div>
+        <div class="dash-label-inner">RDP Activity View</div>
+      </div>
+      <div class="dash-info"><h3>Investigation Dashboard</h3><p>Full incident timeline — failure to resolution</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SOULMATRIX -->
+<div class="section-wrap" id="soulmatrix">
+  <div class="section-label">09 // startup_venture</div>
+  <h2>SoulMatrix</h2>
+  <div class="soulmatrix-box">
+    <div class="soulmatrix-header">
+      <div class="sm-icon">⚡</div>
+      <div>
+        <h3>Founder — SoulMatrix</h3>
+        <p>Cybersecurity Startup · AI-Powered Security Solutions</p>
+      </div>
+    </div>
+    <p class="sm-desc">Building AI-powered cybersecurity solutions for small and medium businesses. SoulMatrix focuses on making enterprise-grade security monitoring and threat detection accessible and affordable — with smart automation at its core.</p>
+    <div class="sm-focus">
+      <div class="sm-card"><div class="sm-card-dot"></div><span>Security Monitoring</span></div>
+      <div class="sm-card"><div class="sm-card-dot"></div><span>Threat Detection</span></div>
+      <div class="sm-card"><div class="sm-card-dot"></div><span>Vulnerability Assessment</span></div>
+      <div class="sm-card"><div class="sm-card-dot"></div><span>AI Security Assistant</span></div>
+      <div class="sm-card"><div class="sm-card-dot"></div><span>Security Reporting</span></div>
+    </div>
+
+    <!-- AI PROJECTS -->
+    <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);">
+      <p style="font-family:var(--mono);font-size:0.72rem;color:var(--cyan);letter-spacing:0.15em;margin-bottom:1.25rem;">// active_ai_projects</p>
+      <div class="ai-projects">
+
+        <!-- RAW -->
+        <div class="ai-card raw">
+          <div class="ai-card-label">⟳ IN DEVELOPMENT</div>
+          <div class="ai-name">RAV</div>
+          <div class="ai-subtitle">AI-Powered Autonomous Security System</div>
+          <p class="ai-desc">An advanced AI security system designed to autonomously monitor, detect, and respond to cyber threats in real time. RAW combines machine learning with SOC workflows to deliver intelligent threat analysis, automated incident handling, and proactive defense capabilities.</p>
+          <div class="ai-tags">
+            <span class="ai-tag">AI/ML</span>
+            <span class="ai-tag">Threat Detection</span>
+            <span class="ai-tag">Auto Response</span>
+            <span class="ai-tag">Security Ops</span>
+            <span class="ai-tag">Real-Time Analysis</span>
+          </div>
+        </div>
+
+        <!-- NYREX -->
+        <div class="ai-card nyrex">
+          <div class="ai-card-label">⟳ IN DEVELOPMENT</div>
+          <div class="ai-name">NYREX</div>
+          <div class="ai-subtitle">AI Personal Assistant · Dual Version</div>
+          <p class="ai-desc">An intelligent AI personal assistant that understands context, assists with tasks, and adapts to user needs. NYREX comes in two powerful versions — one for everyday users and one built for enterprise-grade business use.</p>
+          <div class="nyrex-versions">
+            <div class="nyrex-v">
+              <div class="nyrex-v-title personal">NYREX Personal</div>
+              <p>Smart personal assistant for everyday users — tasks, reminders, intelligent conversations, and productivity support.</p>
+            </div>
+            <div class="nyrex-v">
+              <div class="nyrex-v-title enterprise">NYREX Enterprise</div>
+              <p>Advanced version for companies — workflow automation, data insights, team integrations, and business-grade AI features.</p>
+            </div>
+          </div>
+          <div class="ai-tags" style="margin-top:0.85rem;">
+            <span class="ai-tag">AI Assistant</span>
+            <span class="ai-tag">NLP</span>
+            <span class="ai-tag">Automation</span>
+            <span class="ai-tag">Enterprise</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- GITHUB -->
+<div class="section-wrap" id="github">
+  <div class="section-label">10 // github_showcase</div>
+  <h2>Open Source Work</h2>
+  <div class="github-grid">
+    <div class="gh-card">
+      <div class="gh-card-top"><span class="gh-type">SPL Queries</span></div>
+      <h3>splunk-detection-rules</h3>
+      <p>Collection of SPL detection queries for brute force, password spray, RDP monitoring, and authentication anomaly detection.</p>
+      <div class="gh-footer"><span class="gh-lang">SPL</span><a href="https://github.com/manmath1272-design" class="gh-link" target="_blank">→ github</a></div>
+    </div>
+    <div class="gh-card">
+      <div class="gh-card-top"><span class="gh-type">Incident Reports</span></div>
+      <h3>soc-investigation-reports</h3>
+      <p>Documented incident investigation reports from hands-on lab environments — RDP brute force, password spray, and privilege escalation cases.</p>
+      <div class="gh-footer"><span class="gh-lang">Markdown</span><a href="https://github.com/manmath1272-design" class="gh-link" target="_blank">→ github</a></div>
+    </div>
+    <div class="gh-card">
+      <div class="gh-card-top"><span class="gh-type">Lab Documentation</span></div>
+      <h3>home-soc-lab-setup</h3>
+      <p>Step-by-step documentation of building a personal SOC lab — Splunk configuration, forwarder setup, log collection, and monitoring workflows.</p>
+      <div class="gh-footer"><span class="gh-lang">Markdown</span><a href="https://github.com/manmath1272-design" class="gh-link" target="_blank">→ github</a></div>
+    </div>
+    <div class="gh-card">
+      <div class="gh-card-top"><span class="gh-type">Security Notes</span></div>
+      <h3>windows-event-log-notes</h3>
+      <p>Windows Event Log reference notes — Event IDs, Logon Types, authentication analysis techniques, and investigation checklists.</p>
+      <div class="gh-footer"><span class="gh-lang">Markdown</span><a href="https://github.com/manmath1272-design" class="gh-link" target="_blank">→ github</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<div class="section-wrap" id="experience">
+  <div class="section-label">11 // hands_on_experience</div>
+  <h2>Practical Experience</h2>
+  <div class="exp-grid">
+    <div class="exp-box">
+      <h3>// windows_event_log_experience</h3>
+      <div class="exp-items">
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Event ID 4624 — Successful login analysis</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Event ID 4625 — Failed login and brute force detection</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Event ID 4672 — Special privileges assigned</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Logon Type 2 (Interactive) investigation</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Logon Type 3 (Network) access monitoring</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Logon Type 10 (RDP) activity monitoring</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Authentication event correlation and analysis</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>User activity monitoring and reporting</span></div>
+      </div>
+    </div>
+    <div class="exp-box">
+      <h3>// splunk_experience</h3>
+      <div class="exp-items">
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Splunk installation and configuration</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Universal Forwarder deployment</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Log collection and ingestion pipeline</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Search Processing Language (SPL) queries</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Dashboard creation and usage</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Brute force detection with SPL</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Authentication monitoring and alerting</span></div>
+        <div class="exp-item"><span class="exp-item-dot">▸</span><span>Security investigations and incident analysis</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL EXPERIENCE CARDS -->
+  <div class="exp-full">
+    <h3>// tool_experience</h3>
+    <div class="exp-tool-grid">
+      <div class="exp-tool-card">
+        <div class="exp-tool-name"><span class="exp-tool-dot"></span>Burp Suite</div>
+        <p>Used for web application security testing — intercepting HTTP/S traffic, identifying vulnerabilities like XSS and injection flaws, and testing authentication mechanisms.</p>
+      </div>
+      <div class="exp-tool-card">
+        <div class="exp-tool-name"><span class="exp-tool-dot"></span>Wireshark</div>
+        <p>Performed packet-level network analysis — capturing live traffic, analyzing TCP/IP sessions, identifying suspicious communication patterns, and troubleshooting network issues.</p>
+      </div>
+      <div class="exp-tool-card">
+        <div class="exp-tool-name"><span class="exp-tool-dot"></span>Nmap</div>
+        <p>Conducted network reconnaissance — port scanning, service version detection, OS fingerprinting, and identifying open attack surfaces on target systems.</p>
+      </div>
+      <div class="exp-tool-card">
+        <div class="exp-tool-name"><span class="exp-tool-dot"></span>Kali Linux</div>
+        <p>Primary OS for security lab work — running penetration testing tools, configuring attack simulations, and practicing offensive techniques to better understand defensive gaps.</p>
+      </div>
+      <div class="exp-tool-card">
+        <div class="exp-tool-name"><span class="exp-tool-dot"></span>Splunk Enterprise</div>
+        <p>End-to-end SIEM experience — ingesting Windows security logs, writing SPL detection queries, building dashboards, and running security investigations.</p>
+      </div>
+      <div class="exp-tool-card">
+        <div class="exp-tool-name"><span class="exp-tool-dot"></span>VirtualBox</div>
+        <p>Built and managed isolated lab environments — running Windows VMs for attack simulations, Splunk servers for log collection, and multi-machine SOC lab setups.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="section-wrap" id="contact">
+  <div class="section-label">12 // contact</div>
+  <h2>Let's Connect</h2>
+  <div class="contact-box">
+    <p>Open to SOC Analyst roles, cybersecurity internships, and blue team collaborations. Feel free to reach out.</p>
+    <div class="contact-links">
+      <a href="mailto:manmath1272@gmail.com" class="contact-link">📧 manmath1272@gmail.com</a>
+      <a href="https://www.linkedin.com/in/manmath-swami-67921a39a/" class="contact-link" target="_blank">💼 LinkedIn</a>
+      <a href="https://github.com/manmath1272-design" class="contact-link" target="_blank">🐙 GitHub</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span style="color:var(--cyan);">&gt;</span> Manmath Swami · SOC Analyst Candidate · Founder @ SoulMatrix · 2025
+</footer>
+
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+document.addEventListener('click',function(e){
+  var menu=document.getElementById('mobileMenu');
+  var ham=document.getElementById('hamburger');
+  if(!menu.contains(e.target)&&!ham.contains(e.target)){
+    menu.classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
